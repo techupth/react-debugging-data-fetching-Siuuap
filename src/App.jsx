@@ -5,28 +5,30 @@ import "./App.css";
 function App() {
   const [products, setProducts] = useState([]);
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("https://dummyjson.com/products");
+      console.log(response);
+      setProducts(response.data.products);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = () => {
-      try {
-        const response = await axios.get("https://dummyjson.com/products");
-        setProducts(response.data.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
     fetchData();
   }, []);
 
   return (
-    <div className="app-container">
+    <div className="app-container hover:animate-spin">
       <h1>Product List</h1>
-      <div className="product-list">
+      <div className="product-list ">
         {products.map((product) => (
-          <div className="product-card" key={product.id}>
+          <div className="product-card hover:animate-spin" key={product.id}>
             <h2>{product.title}</h2>
             <p>Description: {product.description}</p>
             <p>Price: ${product.price}</p>
-            <img src={product.picture} alt={product.title} />
+            <img src={product.thumbnail} alt={product.title} />
           </div>
         ))}
       </div>
