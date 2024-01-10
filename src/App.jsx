@@ -20,7 +20,7 @@ function App() {
   }, []);
 
   return (
-    <div className="app-container hover:animate-spin">
+    <div className="app-container">
       <h1>Product List</h1>
       <div className="product-list ">
         {products.map((product) => (
